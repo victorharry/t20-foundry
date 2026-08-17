@@ -129,19 +129,20 @@
 
     .portrait {
       flex: 0 0 auto;
-      padding: 0.5rem 0.5rem 0;
-      display: flex;
-      justify-content: center;
+      padding: 0;
+      display: block;
+      line-height: 0;
 
       img.profile {
+        display: block;
         width: 100%;
-        max-width: 12.5rem;
-        height: 9rem;
+        max-width: none;
+        height: 10rem;
         object-fit: cover;
-        object-position: top;
-        border: 1px solid rgba(233, 215, 161, 0.35);
-        border-radius: 4px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        object-position: center top;
+        border: none;
+        border-radius: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
         cursor: pointer;
       }
     }

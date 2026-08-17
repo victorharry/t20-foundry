@@ -34,9 +34,13 @@
 		</ul>
 	</section>
 	<section class="char-level">
-		<div class="level" data-tooltip="{{localize 'T20.Level'}}">
-			<label>{{localize 'T20.Level'}}</label>
-			<span class="value">{{system.attributes.nivel.value}}</span>
+		<div class="level-block">
+			<a class="level-control" data-action="level-down" data-tooltip="{{localize 'T20.LevelDown'}}"><i class="fa-solid fa-minus"></i></a>
+			<div class="level" data-tooltip="{{localize 'T20.CRB.LevelHint'}}">
+				<label>{{localize 'T20.Level'}}</label>
+				<span class="value">{{system.attributes.nivel.value}}</span>
+			</div>
+			<a class="level-control" data-action="level-up" data-tooltip="{{localize 'T20.LevelUp'}}"><i class="fa-solid fa-plus"></i></a>
 		</div>
 		{{#unless disableExperience}}
 		<div class="exp-data">

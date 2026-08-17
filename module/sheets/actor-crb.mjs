@@ -63,5 +63,37 @@ export default class ActorSheetT20CharacterCRB extends ActorSheetT20CharacterTab
 			const id = ev.currentTarget.closest(".item")?.dataset.itemId;
 			this.actor.items.get(id)?.sheet.render(true);
 		});
+		// Botões +/− de nível no cabeçalho: sobem/descem o nível de uma classe
+		html.find(".level-control").click(this._onLevelControl.bind(this));
+	}
+
+	/**
+	 * Aumenta ou diminui o nível de classe do personagem. O nível do personagem é a soma dos
+	 * níveis dos itens de classe; com mais de uma classe, pergunta qual alterar.
+	 * @param {MouseEvent} event
+	 */
+	async _onLevelControl(event) {
+		event.preventDefault();
+		const delta = event.currentTarget.dataset.action === "level-up" ? 1 : -1;
+		const classes = this.actor.itemTypes.classe;
+		if (!classes.length) {
+			ui.notifications.warn(game.i18n.localize("T20.CRB.NoClass"));
+			return game.packs.get("tormenta20.classes")?.render(true);
+		}
+		const maxLevel = game.settings.get("tormenta20", "gameSystem") === "Skyfall" ? 10 : 20;
+		const apply = async (cls) => {
+			const niveis = Math.clamp((cls.system.niveis ?? 1) + delta, 1, maxLevel);
+			if (niveis === cls.system.niveis) return;
+			await cls.update({ "system.niveis": niveis });
+		};
+		if (classes.length === 1) return apply(classes[0]);
+		const buttons = Object.fromEntries(
+			classes.map((c) => [c.id, { label: `${c.name} ${c.system.niveis}`, callback: () => apply(c) }])
+		);
+		return new Dialog({
+			title: game.i18n.localize(delta > 0 ? "T20.LevelUp" : "T20.LevelDown"),
+			content: `<p>${game.i18n.localize("T20.CRB.ChooseClass")}</p>`,
+			buttons
+		}).render(true);
 	}
 }

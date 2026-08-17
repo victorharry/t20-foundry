@@ -1186,7 +1186,7 @@
     "CharacterSheet": "Ficha de Personagem T20",
     "CharacterSheetTabbed": "Ficha de Personagem T20 - Abas",
     "CharacterSheetCRB": "Ficha de Personagem T20 - Livro",
-    "CRB": {"ArmorPenaltyAbbr": "Pen. armadura", "Combat": "Combate", "Favorites": "Favoritos", "FavoritesHint": "clique com o botão direito em um item, poder ou magia para favoritar", "Max": "Máx."},
+    "CRB": {"LevelHint": "Nível = soma dos níveis de classe. Use + / − ao lado, ou clique com o botão direito na classe.", "NoClass": "O personagem ainda não tem classe. Arraste uma classe do compêndio para a ficha.", "ChooseClass": "Qual classe recebe o nível?", "ArmorPenaltyAbbr": "Pen. armadura", "Combat": "Combate", "Favorites": "Favoritos", "FavoritesHint": "clique com o botão direito em um item, poder ou magia para favoritar", "Max": "Máx."},
     "SimpleActorSheet": "Ficha de Personagem do Mestre",
     "NPCSheet": "Ficha de Ameaça",
     "ItemSheet": "Ficha de Item",

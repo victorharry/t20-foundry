@@ -1092,7 +1092,7 @@
     "CharacterSheet": "Character Sheet",
     "CharacterSheetTabbed": "Character Sheet - Tabs",
     "CharacterSheetCRB": "T20 Character Sheet - Book style",
-    "CRB": {"ArmorPenaltyAbbr": "Armor pen.", "Combat": "Combat", "Favorites": "Favorites", "FavoritesHint": "right-click an item, power or spell to favorite it", "Max": "Max"},
+    "CRB": {"LevelHint": "Level = sum of class levels. Use + / − beside it, or right-click the class.", "NoClass": "This character has no class yet. Drag a class from the compendium onto the sheet.", "ChooseClass": "Which class gets the level?", "ArmorPenaltyAbbr": "Armor pen.", "Combat": "Combat", "Favorites": "Favorites", "FavoritesHint": "right-click an item, power or spell to favorite it", "Max": "Max"},
     "NPCSheet": "NPC sheet",
     "CharacterBuilderSheet": "NPC creation",
     "SettingSheetSettings": "Sheet Settings",

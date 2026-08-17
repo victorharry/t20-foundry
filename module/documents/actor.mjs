@@ -368,7 +368,11 @@ export default class ActorT20 extends Actor {
 				// this.update({ "system.pericias": skills });
 				break;
 			default:
-				if (!this._stats || this._stats.systemVersion < "1.4.100") {
+				// Conversão para o formato GOTY apenas para dados realmente antigos. Versões 1.0.x–1.1.x do fork T20
+				// são posteriores à 1.5.015 do sistema original e NÃO devem ser convertidas.
+				const stamped = this._stats?.systemVersion;
+				const forkLegacy = typeof stamped === "string" && /^1\.[01]\.\d+$/.test(stamped);
+				if (!this._stats || (!forkLegacy && (!stamped || foundry.utils.isNewerVersion("1.4.100", stamped)))) {
 					// UPDATE ABILITIES TO GOTY
 					for (let [key, ability] of Object.entries(this._source.system.atributos)) {
 						updateData[`system.atributos.${key}.base`] = Math.floor((ability.value - 10) / 2);

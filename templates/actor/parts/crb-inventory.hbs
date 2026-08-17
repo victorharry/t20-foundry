@@ -1,0 +1,42 @@
+<header class="inventory-header">
+	<div class="inventory-currency">
+		<ul class="currency">
+			<li class="currency-header" data-tooltip="{{localize 'T20.Currency'}}"><i class="fas fa-coins"></i></li>
+			<li class="currency-item main" data-tooltip="Tibares (T$)">
+				<label for="system.dinheiro.tp" class="denomination">T$</label>
+				<input type="number" data-dtype="Number" placeholder="0" name="system.dinheiro.tp" value="{{system.dinheiro.tp}}" />
+			</li>
+			{{!-- Campos herdados (ouro/cobre/platina) só aparecem se tiverem valor, para não esconder dinheiro já registrado --}}
+			{{#if system.dinheiro.tl}}
+			<li class="currency-item legacy" data-tooltip="{{localize 'T20.CurrencyPlat'}} (campo antigo)">
+				<label class="denomination">{{localize 'T20.CurrencyPlatAbbr'}}</label>
+				<input type="number" data-dtype="Number" name="system.dinheiro.tl" value="{{system.dinheiro.tl}}" />
+			</li>
+			{{/if}}
+			{{#if system.dinheiro.to}}
+			<li class="currency-item legacy" data-tooltip="{{localize 'T20.CurrencyGold'}} (campo antigo)">
+				<label class="denomination">{{localize 'T20.CurrencyGoldAbbr'}}</label>
+				<input type="number" data-dtype="Number" name="system.dinheiro.to" value="{{system.dinheiro.to}}" />
+			</li>
+			{{/if}}
+			{{#if system.dinheiro.tc}}
+			<li class="currency-item legacy" data-tooltip="{{localize 'T20.CurrencyCopper'}} (campo antigo)">
+				<label class="denomination">{{localize 'T20.CurrencyCopperAbbr'}}</label>
+				<input type="number" data-dtype="Number" name="system.dinheiro.tc" value="{{system.dinheiro.tc}}" />
+			</li>
+			{{/if}}
+		</ul>
+	</div>
+	<div class="item-controls">
+		<a class="button item-control item-dialog" data-type="gerais" data-tooltip="{{localize 'T20.Add'}} {{localize 'T20.Items'}}">
+			<i class="fas fa-plus"></i> {{localize 'T20.Add'}}
+		</a>
+	</div>
+</header>
+<div class="inventory-list">
+	{{> "tormenta20.list-weapon"}}
+	{{> "tormenta20.list-equipment"}}
+	{{> "tormenta20.list-consumable"}}
+	{{> "tormenta20.list-loot"}}
+</div>
+{{> "tormenta20.encumbrance"}}

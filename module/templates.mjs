@@ -20,6 +20,7 @@ export const preloadHandlebarsTemplates = async function () {
 		"systems/tormenta20/templates/actor/parts/crb-header.hbs",
 		"systems/tormenta20/templates/actor/parts/crb-sidebar.hbs",
 		"systems/tormenta20/templates/actor/parts/crb-traits.hbs",
+		"systems/tormenta20/templates/actor/parts/crb-inventory.hbs",
 		"systems/tormenta20/templates/actor/parts/statblock.hbs",
 		"systems/tormenta20/templates/actor/parts/abilities.hbs",
 		"systems/tormenta20/templates/actor/parts/defense.hbs",

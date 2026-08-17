@@ -18,9 +18,20 @@ export default function () {
 		ui.compendium.compileSearchIndex();
 
 		if (game.user.isGM) {
-			const systemMigrationVersion = game.settings.get("tormenta20", "systemMigrationVersion");
+			/**
+			 * Versões do fork T20 anteriores à 1.6.0 (1.0.x–1.1.x) são POSTERIORES ao sistema original 1.5.015:
+			 * mundos gravados por elas já estão migrados. Sem esta normalização as migrações antigas
+			 * (todas comparadas por string com "1.5.0xx"/"1.4.100") rodariam de novo e corromperiam os dados.
+			 */
+			const isForkLegacy = (v) => typeof v === "string" && /^1\.[01]\.\d+$/.test(v);
+			const normalizeVersion = (v) => (isForkLegacy(v) ? "1.5.015" : v);
+			const olderThan = (v, target) => !!v && foundry.utils.isNewerVersion(target, v);
+			const stampOlderThan = (v, target) => !v || (!isForkLegacy(v) && foundry.utils.isNewerVersion(target, v));
+
+			const storedMigrationVersion = game.settings.get("tormenta20", "systemMigrationVersion");
+			const systemMigrationVersion = normalizeVersion(storedMigrationVersion);
 			// Define o padrão dos token de PJ
-			if (systemMigrationVersion < "1.5.000") {
+			if (!systemMigrationVersion || olderThan(systemMigrationVersion, "1.5.000")) {
 				const prototypeTokenOverrides = game.settings.get("core", "prototypeTokenOverrides");
 				await game.settings.set(
 					"core",
@@ -30,7 +41,7 @@ export default function () {
 					})
 				);
 			}
-			if (systemMigrationVersion && systemMigrationVersion < "1.5.006") {
+			if (olderThan(systemMigrationVersion, "1.5.006")) {
 				const packs = game.packs.filter((p) => p.metadata.type === "Actor" && p.metadata.packageType !== "system");
 				const consertaAtores = async (actors, pack) => {
 					for (const actor of actors) {
@@ -96,15 +107,15 @@ export default function () {
 					try {
 						await pack.configure({ locked: false });
 						const actors = await pack.getDocuments();
-						consertaAtores(actors, pack);
+						await consertaAtores(actors, pack);
 					} finally {
 						await pack.configure({ locked: wasLocked });
 					}
 				}
-				consertaAtores(game.actors.filter((a) => a.type === "npc"));
+				await consertaAtores(game.actors.filter((a) => a.type === "npc"));
 				ui.notifications.info("Conserto concluído", { console: false, permanent: true });
 			}
-			if (systemMigrationVersion && systemMigrationVersion < "1.5.007") {
+			if (olderThan(systemMigrationVersion, "1.5.007")) {
 				const packs = game.packs.filter((p) => p.metadata.type === "Actor" && p.metadata.packageType !== "system");
 				const consertaAtores = async (actors, pack) => {
 					for (const actor of actors) {
@@ -133,15 +144,15 @@ export default function () {
 					try {
 						await pack.configure({ locked: false });
 						const actors = await pack.getDocuments();
-						consertaAtores(actors, pack);
+						await consertaAtores(actors, pack);
 					} finally {
 						await pack.configure({ locked: wasLocked });
 					}
 				}
-				consertaAtores(game.actors.filter((a) => a.type === "npc"));
+				await consertaAtores(game.actors.filter((a) => a.type === "npc"));
 				ui.notifications.info("Conserto concluído", { console: false, permanent: true });
 			}
-			if (systemMigrationVersion && systemMigrationVersion < "1.5.010") {
+			if (olderThan(systemMigrationVersion, "1.5.010")) {
 				const packs = game.packs.filter((p) => p.metadata.type === "Actor" && p.metadata.packageType !== "system");
 				const consertaAtores = async (actors, pack) => {
 					for (const actor of actors) {
@@ -187,15 +198,15 @@ export default function () {
 					try {
 						await pack.configure({ locked: false });
 						const actors = await pack.getDocuments();
-						consertaAtores(actors, pack);
+						await consertaAtores(actors, pack);
 					} finally {
 						await pack.configure({ locked: wasLocked });
 					}
 				}
-				consertaAtores(game.actors.filter((a) => !!a.system.pericias));
+				await consertaAtores(game.actors.filter((a) => !!a.system.pericias));
 				ui.notifications.info("Migração concluída", { console: false, permanent: true });
 			}
-			if (systemMigrationVersion && systemMigrationVersion < "1.5.012") {
+			if (olderThan(systemMigrationVersion, "1.5.012")) {
 				// Fix Skills with Armor Penalty
 				const fixed = new CONFIG.Actor.dataModels.character();
 
@@ -210,13 +221,13 @@ export default function () {
 				for (let character of characters) await character.update(updateData);
 			}
 			game.actors
-				.filter((f) => !f._stats.systemVersion || f._stats.systemVersion < "1.5.000")
+				.filter((f) => stampOlderThan(f._stats.systemVersion, "1.5.000"))
 				.forEach((actor) => {
 					actor.items
 						.filter((item) => item.flags?.favorito)
 						.forEach((item) => item.setFlag("tormenta20", "favorito", true));
 				});
-			let oldActors = game.actors.filter((f) => !f._stats.systemVersion || f._stats.systemVersion < "1.4.100");
+			let oldActors = game.actors.filter((f) => stampOlderThan(f._stats.systemVersion, "1.4.100"));
 			// Migration
 			for (const actor of oldActors) {
 				let updateData = {};
@@ -230,6 +241,28 @@ export default function () {
 					updateData["system.attributes.defesa.outros"] = 0;
 				}
 				await actor.update(updateData);
+			}
+			// Reparo para mundos que passaram pelas versões 1.0.x–1.1.x do fork (migrações antigas rodaram de novo):
+			// perícias padrão que ficaram com atributo "for" voltam ao atributo da regra.
+			if (isForkLegacy(storedMigrationVersion)) {
+				let reparados = 0;
+				for (const actor of game.actors) {
+					if (!actor.system.pericias) continue;
+					const changes = {};
+					for (const [key, cfg] of Object.entries(CONFIG.T20.pericias)) {
+						const sk = actor.system.pericias[key];
+						if (sk && sk.atributo === "for" && cfg.abl !== "for") changes[`system.pericias.${key}.atributo`] = cfg.abl;
+					}
+					if (!foundry.utils.isEmpty(changes)) {
+						await actor.update(changes);
+						reparados++;
+					}
+				}
+				ui.notifications.warn(
+					`T20 ${game.system.version}: as migrações antigas não rodam mais. Perícias reparadas em ${reparados} ator(es). `
+						+ "Confira os valores BASE dos atributos dos personagens (podem ter ficado em -5) e reimporte ameaças de compêndio se necessário.",
+					{ permanent: true }
+				);
 			}
 			return game.settings.set("tormenta20", "systemMigrationVersion", game.system.version);
 		}

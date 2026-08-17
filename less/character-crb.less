@@ -1219,12 +1219,21 @@
 
     // ---- inventário -------------------------------------------------------
     > .tab.inventory {
-      > header.flexrow {
+      > header.inventory-header {
+        display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 0.5rem;
         margin-bottom: 0.4rem;
+        .item-controls {
+          flex: 0 0 auto;
+        }
         .item-controls a.button {
           .crb-band();
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          white-space: nowrap;
           border: none;
           color: var(--crb-tertiary);
           padding: 0 0.6rem;
@@ -1241,9 +1250,10 @@
         overflow: visible;
       }
       .inventory-currency {
-        flex: 1;
+        flex: 0 0 auto;
       }
       ul.currency {
+        display: flex;
         box-shadow: var(--crb-emboss);
         background: var(--crb-sub);
         color: var(--crb-text-light);
@@ -1274,11 +1284,23 @@
           }
           input {
             color: var(--crb-text-light);
-            width: 3.5rem;
+            width: 4.5rem;
             text-align: right;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-family: var(--crb-sans);
-            height: 1.2rem;
+            font: 700 1rem var(--crb-serif);
+            height: 1.3rem;
+            background: transparent;
+          }
+          &.main label {
+            font-size: 0.8rem;
+            color: var(--crb-tertiary);
+          }
+          &.legacy {
+            opacity: 0.75;
+            input {
+              width: 3.2rem;
+              font-size: 0.8rem;
+            }
           }
         }
       }

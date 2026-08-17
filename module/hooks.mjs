@@ -264,6 +264,24 @@ export default function () {
 					{ permanent: true }
 				);
 			}
+			// 1.6.3: moeda única T$ (campo dinheiro.tp) — soma TO/TL/TC ao T$ (1:1) e zera os campos antigos
+			if (!storedMigrationVersion || foundry.utils.isNewerVersion("1.6.3", storedMigrationVersion)) {
+				let convertidos = 0;
+				for (const actor of game.actors) {
+					const d = actor.system.dinheiro;
+					if (!d) continue;
+					const extra = (d.to || 0) + (d.tl || 0) + (d.tc || 0);
+					if (!extra) continue;
+					await actor.update({
+						"system.dinheiro.tp": (d.tp || 0) + extra,
+						"system.dinheiro.to": 0,
+						"system.dinheiro.tl": 0,
+						"system.dinheiro.tc": 0
+					});
+					convertidos++;
+				}
+				if (convertidos) ui.notifications.info(`T20: moedas de ${convertidos} ator(es) unificadas em T$.`, { permanent: true });
+			}
 			return game.settings.set("tormenta20", "systemMigrationVersion", game.system.version);
 		}
 	});

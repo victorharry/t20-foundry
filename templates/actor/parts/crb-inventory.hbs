@@ -6,25 +6,6 @@
 				<label for="system.dinheiro.tp" class="denomination">T$</label>
 				<input type="number" data-dtype="Number" placeholder="0" name="system.dinheiro.tp" value="{{system.dinheiro.tp}}" />
 			</li>
-			{{!-- Campos herdados (ouro/cobre/platina) só aparecem se tiverem valor, para não esconder dinheiro já registrado --}}
-			{{#if system.dinheiro.tl}}
-			<li class="currency-item legacy" data-tooltip="{{localize 'T20.CurrencyPlat'}} (campo antigo)">
-				<label class="denomination">{{localize 'T20.CurrencyPlatAbbr'}}</label>
-				<input type="number" data-dtype="Number" name="system.dinheiro.tl" value="{{system.dinheiro.tl}}" />
-			</li>
-			{{/if}}
-			{{#if system.dinheiro.to}}
-			<li class="currency-item legacy" data-tooltip="{{localize 'T20.CurrencyGold'}} (campo antigo)">
-				<label class="denomination">{{localize 'T20.CurrencyGoldAbbr'}}</label>
-				<input type="number" data-dtype="Number" name="system.dinheiro.to" value="{{system.dinheiro.to}}" />
-			</li>
-			{{/if}}
-			{{#if system.dinheiro.tc}}
-			<li class="currency-item legacy" data-tooltip="{{localize 'T20.CurrencyCopper'}} (campo antigo)">
-				<label class="denomination">{{localize 'T20.CurrencyCopperAbbr'}}</label>
-				<input type="number" data-dtype="Number" name="system.dinheiro.tc" value="{{system.dinheiro.tc}}" />
-			</li>
-			{{/if}}
 		</ul>
 	</div>
 	<div class="item-controls">

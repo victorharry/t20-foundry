@@ -49,6 +49,11 @@ export default class ActorSheetT20CharacterCRB extends ActorSheetT20CharacterTab
 			saves: ["fort", "refl", "vont"].map((key) => byKey[key]).filter(Boolean),
 			quick: ["inic", "perc"].map((key) => byKey[key]).filter(Boolean),
 			showSpells: sheetData.actor.maiorCirculo > 0 || sheetData.editMode,
+			xpPct: (() => {
+				const xp = this.actor.system.attributes?.nivel?.xp ?? {};
+				const max = Number(xp.proximo) || 0;
+				return max > 0 ? Math.clamp(Math.round(((Number(xp.value) || 0) / max) * 100), 0, 100) : 0;
+			})(),
 			classesLabel: (sheetData.actor.classes ?? []).map((c) => `${c.name} ${c.system.niveis}`).join(" / ")
 		};
 		return sheetData;

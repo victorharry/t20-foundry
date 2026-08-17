@@ -160,9 +160,11 @@ export default class ActiveEffectT20 extends ActiveEffect {
 	 * @type {boolean}
 	 */
 	get isTemporary() {
-		const scene = this.getFlag("tormenta20", "durationScene");
-		const duration = this.duration.seconds ?? (this.duration.rounds || this.duration.turns) ?? 0;
-		return scene || duration > 0 || this.statuses.size;
+		// Efeitos "de cena" do T20 são temporários; para o resto, delega ao núcleo.
+		// (No Foundry v14 a duração passou a ser {value, units, expiry} e `duration.seconds` de um efeito
+		// indefinido é Infinity — o cálculo antigo marcava TODOS os efeitos como temporários e enchia o token de ícones.)
+		if (this.getFlag("tormenta20", "durationScene") === true) return true;
+		return super.isTemporary;
 	}
 	/* --------------------------------------------- */
 
@@ -206,21 +208,19 @@ export default class ActiveEffectT20 extends ActiveEffect {
 	 * Prepare derived data related to active effect duration
 	 * @internal
 	 */
-	_prepareDuration() {
-		// const d = this.duration;
-		const isScene = this.getFlag("tormenta20", "durationScene");
-
+	_prepareDuration(...args) {
+		const base = super._prepareDuration(...args) ?? {};
 		// Scene-based duration
-		if (isScene) {
-			return {
+		if (this.getFlag("tormenta20", "durationScene") === true) {
+			return foundry.utils.mergeObject(base, {
 				type: "scene",
 				duration: null,
 				remaining: null,
 				label: game.i18n.localize("T20.TimeScene"),
 				_worldTime: game.time.worldTime
-			};
+			});
 		}
-		return super._prepareDuration();
+		return base;
 	}
 
 	/* --------------------------------------------- */

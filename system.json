@@ -11,11 +11,7 @@
   "authors": [
     {
       "name": "VictorHarry",
-      "url": "https://github.com/victorharry"
-    },
-    {
-      "name": "Vizael (Victor Hugo Paiva) e comunidade — sistema original",
-      "url": "https://gitlab.com/vizael/Tormenta20"
+      "url": "https://github.com/victorharry/t20-foundry"
     }
   ],
   "esmodules": ["tormenta20.mjs"],

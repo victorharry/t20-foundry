@@ -1,0 +1,91 @@
+import Tormenta20TypeData from "../base.mjs";
+
+const fields = foundry.data.fields;
+export default class BasesData extends Tormenta20TypeData {
+	/** @inheritDoc */
+	static defineSchema() {
+		const _fields = tormenta20.data.fields;
+		return {
+			tipo: new fields.StringField({
+				required: true,
+				initial: "",
+				label: "T20.BasesType"
+			}),
+			porte: new fields.StringField({
+				required: true,
+				nullable: false,
+				blank: false,
+				initial: "min",
+				label: "T20.BasesSize",
+				choices: Object.keys(T20.porteType)
+			}),
+			seguranca: new fields.SchemaField({
+				base: new fields.NumberField({
+					required: true,
+					nullable: false,
+					initial: 0,
+					integer: true,
+					min: 0,
+					label: "T20.BasesSecurity"
+				}),
+				bonus: new fields.NumberField({
+					required: true,
+					nullable: false,
+					initial: 0,
+					integer: true,
+					label: "T20.BasesSecurityBonus"
+				}),
+				total: new fields.NumberField({
+					required: true,
+					nullable: false,
+					initial: 0,
+					integer: true,
+					min: 0,
+					label: "T20.BasesSecurityTotal"
+				})
+			}),
+			residentes: new fields.SetField(new fields.ForeignDocumentField(foundry.documents.BaseActor, { idOnly: true })),
+			rooms: new fields.NumberField({
+				required: true,
+				nullable: false,
+				initial: 0,
+				integer: true,
+				min: 0,
+				label: "T20.BasesRoomsNumber"
+			}),
+			detalhes: new fields.SchemaField({
+				biography: new fields.SchemaField({
+					value: new fields.HTMLField({
+						required: true,
+						nullable: false,
+						initial: "",
+						label: "T20.BasesDescription"
+					})
+				})
+			}),
+			attributes: new fields.SchemaField({
+				movement: new fields.EmbeddedDataField(_fields.MovementData, {
+					initial: {
+						walk: { base: 0, bonus: [] },
+						climb: { base: 0, bonus: [] },
+						burrow: { base: 0, bonus: [] },
+						swim: { base: 0, bonus: [] },
+						fly: { base: 0, bonus: [] },
+						hover: false,
+						tags: [],
+						unit: "m"
+					}
+				})
+			})
+		};
+	}
+
+	prepareDerivedData() {
+		super.prepareDerivedData?.();
+
+		// Calculate seguranca.total
+		const base = this.seguranca?.base ?? 0;
+		const bonus = this.seguranca?.bonus ?? 0;
+		this.seguranca.total = base + bonus;
+	}
+}

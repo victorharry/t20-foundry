@@ -1,0 +1,272 @@
+@import "variables.less";
+
+/* ----------------------------------------- */
+/*  Chat Cards
+/* ----------------------------------------- */
+
+.tormenta20.chat-card {
+  .card-header {
+    font-size: 12px;
+    padding: 3px 0;
+    border-top: 2px groove #fff;
+
+    img {
+      flex: 0 0 36px;
+      margin-right: 5px;
+    }
+
+    h3 {
+      flex: 1;
+      margin: 0;
+      line-height: 36px;
+      border: unset;
+      .signika();
+      color: @colorOlive;
+      &:hover {
+        color: #111;
+        text-shadow: 0 0 10px red;
+      }
+    }
+  }
+
+  .card-content {
+    margin: 5px 0;
+
+    h3 {
+      font-size: 12px;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    > * {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+  }
+
+  .card-buttons {
+    margin: 5px 0;
+
+    span {
+      display: block;
+      line-height: 28px;
+      text-align: center;
+      border: 1px solid @borderLight;
+    }
+
+    button {
+      font-size: 12px;
+      height: 24px;
+      line-height: 20px;
+      margin: 2px 0;
+    }
+  }
+
+  .card-footer {
+    padding: 3px 0 0;
+    border-top: 2px groove #fff;
+
+    span {
+      border-right: 2px groove #fff;
+      padding: 0 3px 0 0;
+      font-size: 10px;
+
+      &:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.dice-roll .dice-total {
+  &.success {
+    color: inherit;
+    background: #c7d0c0;
+    border: 1px solid #006c00;
+  }
+  &.failure {
+    color: inherit;
+    background: #ffdddd;
+    border: 1px solid #6e0000;
+  }
+  &.critical {
+    color: #006c00;
+  }
+  &.fumble {
+    color: red;
+  }
+}
+
+/* ################################################################ */
+/*                           Chat-Message                           */
+/* ################################################################ */
+.chat-message {
+  .chat-portrait {
+    max-width: 48px;
+    max-height: 48px;
+    object-fit: fill;
+    margin-right: 3px;
+  }
+
+  &:not(:hover) .message-metadata {
+    visibility: hidden;
+  }
+
+  .message-content.damage-card {
+    * {
+      font-size: 14px;
+    }
+    &.damage-health {
+      background-color: red;
+      background-color: rgba(255, 0, 0, 0.5);
+    }
+    &.damage-heal {
+      background-color: lime;
+      background-color: rgba(0, 255, 0, 0.5);
+    }
+    &.damage-mana {
+      background-color: cyan;
+      background-color: rgba(0, 255, 255, 0.5);
+    }
+    &.damage-hptemp {
+      background-color: magenta;
+      background-color: rgba(255, 0, 255, 0.5);
+    }
+    &.damage-mptemp {
+      background-color: deepskyblue;
+      background-color: rgba(0, 191, 255, 0.5);
+    }
+  }
+}
+
+.tormenta20.item-card {
+  .card-item-header {
+    p {
+      text-align: justify;
+    }
+    h4 {
+      font-size: var(--font-size-14);
+    }
+  }
+  > button {
+    border: @borderGroove !important;
+    background: rgba(255, 255, 240, 0.8) !important;
+    color: initial !important;
+  }
+
+  .card-header {
+    .item-name {
+      .signika();
+      font-size: 1.5em;
+      line-height: 1em;
+      align-self: center;
+    }
+  }
+
+  .chat-spend-mana {
+    font-size: var(--font-size-12);
+    line-height: 12px;
+    max-width: 36px;
+    height: 36px;
+    padding: 0;
+
+    &.truque {
+      background: unset;
+      border: unset;
+      cursor: unset;
+      color: unset;
+    }
+  }
+
+  .dice-result button {
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    margin: 0;
+    color: black;
+  }
+
+  .roll {
+    position: relative;
+
+    &:not(:hover) {
+      .dice-btn {
+        visibility: hidden;
+      }
+    }
+
+    &:has(+ footer) {
+      margin-bottom: 5px;
+    }
+
+    .dice-btn {
+      display: inline-block;
+      z-index: 2;
+      position: absolute;
+      max-height: 26px;
+      font-size: initial;
+
+      button {
+        border: 1px solid #782e22;
+        position: relative;
+        display: inline-block;
+        white-space: nowrap;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        min-height: 24px;
+
+        &:not(:hover) {
+          background: rgba(255, 255, 240, 0.8);
+        }
+      }
+
+      &.right {
+        right: 1px;
+      }
+      &.left {
+        left: 1px;
+      }
+      &.formula {
+        top: 0px;
+      }
+      &.result {
+        bottom: 1px;
+      }
+    }
+  }
+
+  .card-item-effects a {
+    border: 1px solid #202124;
+    border-radius: 5px;
+    display: flex;
+    font-size: 14px;
+  }
+
+  .card-item-template,
+  .card-item-effects {
+    button {
+      border: @borderGroove;
+    }
+    position: relative;
+    span,
+    button img {
+      width: 28px;
+      height: 28px;
+      background-color: #202124;
+      margin-right: 5px;
+      position: absolute;
+      left: 0;
+      float: left;
+      color: white;
+      text-align: center;
+    }
+  }
+}
+
+/* ################################################################ */
+/*                          /Chat-Message                           */
+/* ################################################################ */

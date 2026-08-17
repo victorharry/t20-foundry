@@ -1,0 +1,24 @@
+# IDE
+.idea/
+.vs/
+
+# Node Modules
+node_modules/
+npm-debug.log
+.DS_Store
+
+# Backup Files
+*.bak
+
+# Local Files
+*.lock
+
+# Build Artifacts
+dist/
+packs/*
+!packs/_source/
+foundry/
+# Wiki (Jekyll local)
+docs/_site/
+docs/.jekyll-cache/
+docs/Gemfile.lock

@@ -1,0 +1,391 @@
+@import "./variables.less";
+.tormenta20.sheet.item {
+  min-height: 400px;
+  max-height: 95%;
+  min-width: 480px;
+  .signika();
+
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+
+  .sheet-header {
+    img.profile {
+      border: 2px solid #000;
+    }
+
+    .item-subtitle {
+      flex: 0 0 auto;
+      height: 60px;
+      max-width: 195px;
+      min-width: 100px;
+      margin: 0;
+      padding: 5px;
+      text-align: right;
+      color: @colorTan;
+
+      .item-type {
+        font-size: 24px;
+        line-height: 26px;
+        margin: 0;
+      }
+
+      .item-status {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    .summary {
+      .class-level {
+        flex: 0 0 4em;
+        padding: 0 0.25em;
+        text-align: right;
+      }
+    }
+  }
+
+  .editor {
+    min-height: 15em;
+
+    .tox {
+      min-height: 15em;
+
+      .tox-editor-header {
+        border-bottom: 1px solid var(--faint-color);
+        min-width: max-content;
+        background: unset;
+      }
+      .tox-toolbar__group {
+        padding: 0;
+      }
+      .tox-tbtn {
+        width: 24px;
+        height: 24px;
+      }
+      .tox-tbtn--select {
+        width: auto;
+      }
+      .tox-tbtn--bespoke {
+        width: 90px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  nav.sheet-tabs {
+    margin-bottom: 5px;
+    .item {
+      font-size: 18px;
+    }
+  }
+
+  .sheet-body {
+    overflow: hidden;
+    font-size: 14px;
+
+    .tab {
+      padding: 0 5px;
+      overflow: hidden auto;
+
+      &.enhancements {
+        .form-group {
+          .form-fields i {
+            flex: 0;
+          }
+          i.fa-solid.fa-circle-info {
+            opacity: 0;
+
+            &.implemented {
+              color: #3bb52d;
+              opacity: 1;
+            }
+
+            &.not-implemented {
+              color: #b5782d;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+
+    .item-properties {
+      flex: 0 0 120px;
+      margin: 5px 5px 5px 0;
+      padding-right: 5px;
+      border-right: @borderGroove;
+
+      .form-group {
+        margin: 0;
+        label {
+          line-height: 18px;
+          font-size: 14px;
+        }
+        input {
+          text-align: right;
+          &[type="checkbox"] {
+            flex: 0 0 15px;
+            width: 15px;
+            height: 15px;
+            margin: 0;
+          }
+        }
+      }
+
+      .properties-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          margin: 3px 0;
+          padding: 0 2px;
+          background: rgba(0, 0, 0, 0.05);
+          border: @borderGroove;
+          text-align: center;
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+
+      .properties-header {
+        font-weight: bold;
+        color: @colorOlive;
+        margin: 0.5em 0 0 0;
+        font-size: 1em;
+      }
+    }
+  }
+
+  .sheet-body .form-group {
+    margin: 0;
+    label {
+      line-height: 18px;
+      font-size: 14px;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+
+  .details {
+    // Item Sheet form fields
+    input[type="text"],
+    input[type="number"],
+    select {
+      height: 24px;
+      border: 1px solid @colorTan;
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      span {
+        text-align: center;
+        line-height: 24px;
+      }
+
+      .form-fields {
+        multi-select {
+          &.small-tags {
+            .tag {
+              font-size: var(--font-size-11);
+            }
+          }
+        }
+      }
+
+      &.racas,
+      &.movimento {
+        > .flexrow {
+          gap: 0.25rem 0.5rem;
+
+          > .flexrow {
+            flex-basis: calc(33% - 0.5rem);
+
+            input[type="number"] {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .form-group.input-select {
+      select {
+        flex: 1.8;
+      }
+    }
+
+    .form-group.input-select-select {
+      select {
+        flex: 1.5;
+      }
+    }
+
+    .form-group.uses-per {
+      .form-fields {
+        flex-wrap: nowrap;
+      }
+      input {
+        flex: 0 0 32px;
+      }
+      span {
+        flex: 0 0 16px;
+        margin: 0 4px 0 0;
+      }
+    }
+    span.sep {
+      flex: 0 0 8px;
+    }
+
+    .prepared {
+      flex: 1.3 !important;
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    // Spell Materials
+    .spell-materials {
+      flex: 0 0 100%;
+      margin: 0.25em 0;
+      justify-content: flex-end;
+      label {
+        flex: 0 0 64px;
+        text-align: right;
+        margin-right: 5px;
+        font-size: 12px;
+        line-height: 24px;
+      }
+      input[type="text"] {
+        flex: 0 0 48px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .choicesets {
+    margin: 0;
+    padding: 0;
+
+    .choiceset {
+      margin: 0;
+      padding: 0;
+
+      .form-group {
+        .item-controls {
+          flex: 0;
+        }
+      }
+      .choiceset-item {
+        .item {
+          gap: 0.5rem;
+          img {
+            flex: 0 0 30px;
+          }
+          .item-name {
+            align-content: center;
+          }
+        }
+        .item-summary {
+          flex: 0 0 100%;
+          // font-size: 12px;
+          line-height: 16px;
+          padding: 0.25em 0.5em;
+          color: @colorDark;
+          border-top: 1px solid @colorFaint;
+        }
+      }
+      .drop-zone {
+        margin: 5px 0;
+        text-align: center;
+      }
+    }
+  }
+
+  .rolls {
+    h3 {
+      border: 0;
+    }
+    .rolls-controls {
+      flex: initial;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+
+  h4.damage-header {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    line-height: 24px;
+    color: @colorOlive;
+  }
+
+  .damage-parts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .damage-part {
+      flex: 0 0 100%;
+      padding: 0;
+      input {
+        flex: 3;
+      }
+      select {
+        margin-left: 5px;
+        flex: 1;
+      }
+    }
+  }
+
+  .damage-control {
+    width: 18px;
+    flex: 0 0 18px;
+    line-height: 24px;
+    float: right;
+    text-align: right;
+    color: @colorTan;
+  }
+
+  .roll-header .item-controls,
+  .roll-part .parts-control {
+    align-content: center;
+    flex: 0 0 fit-content;
+    padding: 0 5px;
+    text-align: center;
+  }
+
+  .roll-parts {
+    flex-direction: column;
+    .roll-part {
+      width: 100%;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+
+  .weapon-properties label.checkbox {
+    flex: 0 0 98px;
+    white-space: nowrap;
+  }
+
+  /* ----------------------------------------- */
+  /*  Active Effects                           */
+  /* ----------------------------------------- */
+
+  .effects-list {
+    .item-list {
+      padding: 0;
+      .effects {
+        line-height: normal;
+      }
+    }
+  }
+}

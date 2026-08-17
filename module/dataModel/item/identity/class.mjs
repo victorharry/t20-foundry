@@ -1,0 +1,52 @@
+import IdentityData from "./identity.mjs";
+
+const fields = foundry.data.fields;
+
+// , label:"T20.Value", hint:"T20.Hint"
+export default class ClassData extends IdentityData {
+	/** @override */
+	static defineSchema() {
+		let type = "classe";
+		return {
+			...super.defineSchema(),
+			...this.schemaRolls(),
+			pericias: new fields.SchemaField({
+				inatas: new fields.StringField({
+					required: true,
+					nullable: false,
+					initial: ""
+				}),
+				numero: new fields.NumberField({
+					required: true,
+					nullable: false,
+					initial: 0
+				})
+			}),
+			niveis: new fields.NumberField({
+				required: true,
+				initial: 1,
+				label: "T20.ItemClassLevels",
+				hint: "T20.ItemClassLevelsHint"
+			}),
+			pvPorNivel: new fields.NumberField({
+				required: true,
+				initial: 1,
+				label: "T20.ItemClassHPLevel",
+				hint: "T20.ItemClassHPLevelHint"
+			}),
+			pmPorNivel: new fields.NumberField({
+				required: true,
+				initial: 1,
+				label: "T20.ItemClassMPLevel",
+				hint: "T20.ItemClassMPLevelHint"
+			}),
+			inicial: new fields.BooleanField({ label: "T20.ItemClassIsInitial", hint: "T20.ItemClassIsInitialHint" })
+		};
+	}
+
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		const maxLvl = game.settings.get("tormenta20", "gameSystem") === "Skyfall" ? 10 : 20;
+		this.niveis = Math.clamp(this.niveis, 1, maxLvl);
+	}
+}

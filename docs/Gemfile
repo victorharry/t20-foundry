@@ -1,0 +1,8 @@
+# Somente para pré-visualizar a wiki localmente:
+#   cd docs && bundle install && bundle exec jekyll serve
+# O GitHub Pages usa o mesmo conjunto (gem github-pages) na publicação.
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+gem "jekyll-remote-theme"
+gem "webrick"

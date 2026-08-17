@@ -1,0 +1,34 @@
+@import "./variables.less";
+
+/* ----------------------------------------- */
+/*  Hazard Sheet Styles                      */
+/* ----------------------------------------- */
+
+&.hazard {
+  min-width: 550px;
+  min-height: 650px;
+
+  .sheet-header {
+    img.profile {
+      flex: 0 0 80px;
+      height: 80px;
+      max-width: 80px;
+    }
+    aside {
+      flex: 0 0 auto;
+
+      .hazard-level {
+        text-align: center;
+        width: 60px;
+      }
+    }
+  }
+
+  .sheet-body {
+    height: calc(100% - 60px);
+
+    h3 {
+      margin: 0;
+    }
+  }
+}

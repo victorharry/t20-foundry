@@ -1,0 +1,50 @@
+title: T20 — Wiki
+description: Documentação de uso do sistema T20 (Tormenta20) para Foundry VTT — referências @, chaves de efeitos, macros e API.
+url: https://victorharry.github.io
+baseurl: /t20-foundry
+lang: pt-BR
+
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+color_scheme: dark
+search_enabled: true
+heading_anchors: true
+enable_copy_code_button: true
+
+aux_links:
+  "Repositório no GitHub":
+    - https://github.com/victorharry/t20-foundry
+  "Releases":
+    - https://github.com/victorharry/t20-foundry/releases
+
+nav_external_links:
+  - title: Sistema original (Vizael)
+    url: https://gitlab.com/vizael/Tormenta20
+
+back_to_top: true
+back_to_top_text: "Voltar ao topo"
+
+footer_content: 'Projeto de fãs, não oficial. Tormenta20 © Jambo Editora. Código sob BSD-3-Clause.'
+
+callouts:
+  note:
+    title: Nota
+    color: blue
+  warning:
+    title: Atenção
+    color: yellow
+  important:
+    title: Importante
+    color: red
+  tip:
+    title: Dica
+    color: green
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

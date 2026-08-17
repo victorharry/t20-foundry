@@ -1,0 +1,66 @@
+{{!-- Resistências a dano --}}
+<section class="subsection">
+	<header>
+		<label>{{localize "T20.Resistances"}}</label>
+		<a class="config-button" data-action="resistance" data-target="system.tracos.resistencias"><i class="fa-solid fa-fw fa-pen-to-square"></i>{{localize "T20.Edit"}}</a>
+	</header>
+	<ul class="tags trait-list">
+		{{#each system.tracos.resistencias as |v k|}}
+			{{#if v.imunidade}}
+				<li class="tag {{k}}" data-tooltip="{{localize 'T20.DamImm'}}">{{lookup @root.config.damageTypes k}} <i class="fas fa-fist-raised"></i></li>
+			{{else if v.danoPorDado}}
+				<li class="tag {{k}}" data-tooltip="{{localize 'T20.DamPerDie'}}">{{lookup @root.config.damageTypes k}} <i class="fa-solid fa-dice"></i></li>
+			{{else if v.vulnerabilidade}}
+				<li class="tag {{k}}" data-tooltip="{{localize 'T20.DamVuln'}}">{{lookup @root.config.damageTypes k}} <i class="fas fa-skull"></i></li>
+			{{else if (gt v.excecao 0)}}
+				<li class="tag {{k}}">{{v.excecao}}/{{lookup @root.config.damageTypes k}}</li>
+			{{else if (gt v.value 0)}}
+				<li class="tag {{k}}">{{lookup @root.config.damageTypes k}} {{v.value}}</li>
+			{{/if}}
+		{{/each}}
+	</ul>
+</section>
+
+{{!-- Imunidade a condições --}}
+<section class="subsection">
+	<header>
+		<label>{{localize "T20.StatusImm"}}</label>
+		<a class="trait-selector ic" data-options="conditionTypes" data-target="system.tracos.ic"><i class="fa-solid fa-fw fa-pen-to-square"></i>{{localize "T20.Edit"}}</a>
+	</header>
+	<ul class="tags trait-list">
+		{{#each system.tracos.ic.selected as |v k|}}
+			<li class="tag {{k}}">{{v}}</li>
+		{{/each}}
+	</ul>
+</section>
+
+{{!-- Proficiências --}}
+<section class="subsection">
+	<header><span>{{localize "T20.Proficiencies"}}</span></header>
+	{{#if enableLanguages}}
+	<div class="trait-group">
+		<a class="trait-selector" data-options="idiomas" data-target="system.tracos.idiomas"><label>{{localize "T20.Languages"}}</label> <i class="fa-solid fa-pen-to-square"></i></a>
+		<ul class="tags trait-list">
+			{{#each system.tracos.idiomas.selected as |v k|}}
+				<li class="tag {{k}}">{{v}}</li>
+			{{/each}}
+		</ul>
+	</div>
+	{{/if}}
+	<div class="trait-group">
+		<a class="trait-selector" data-options="profArmas" data-target="system.tracos.profArmas"><label>{{localize "T20.Weapons"}}</label> <i class="fa-solid fa-pen-to-square"></i></a>
+		<ul class="tags trait-list">
+			{{#each system.tracos.profArmas.selected as |v k|}}
+				<li class="tag {{k}}">{{localize v}}</li>
+			{{/each}}
+		</ul>
+	</div>
+	<div class="trait-group">
+		<a class="trait-selector armaduras" data-options="profArmaduras" data-target="system.tracos.profArmaduras"><label>{{localize "T20.Armors"}}</label> <i class="fa-solid fa-pen-to-square"></i></a>
+		<ul class="tags trait-list">
+			{{#each system.tracos.profArmaduras.selected as |v k|}}
+				<li class="tag {{k}}">{{localize v}}</li>
+			{{/each}}
+		</ul>
+	</div>
+</section>

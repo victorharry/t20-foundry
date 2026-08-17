@@ -1185,6 +1185,8 @@
     "BasesSheet": "Ficha de Bases",
     "CharacterSheet": "Ficha de Personagem T20",
     "CharacterSheetTabbed": "Ficha de Personagem T20 - Abas",
+    "CharacterSheetCRB": "Ficha de Personagem T20 - Livro",
+    "CRB": {"ArmorPenaltyAbbr": "Pen. armadura", "Combat": "Combate", "Favorites": "Favoritos", "FavoritesHint": "clique com o botão direito em um item, poder ou magia para favoritar", "Max": "Máx."},
     "SimpleActorSheet": "Ficha de Personagem do Mestre",
     "NPCSheet": "Ficha de Ameaça",
     "ItemSheet": "Ficha de Item",

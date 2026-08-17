@@ -1,0 +1,52 @@
+<header class="char-header" data-tooltip-direction="UP">
+	<section class="char-details">
+		<h1 class="char-name">
+			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'T20.Name'}}" spellcheck="false" />
+		</h1>
+		<ul class="char-summary">
+			<li class="char-race">
+				<span {{#if actor.race}}class="item" data-item-id="{{actor.race._id}}"{{/if}}>
+					<a class="item-control {{#unless actor.race}}add-raca{{/unless}}" data-tooltip="{{localize 'T20.Race'}}">
+						{{ifThen actor.race actor.race.name (localize 'T20.Race')}}
+					</a>
+				</span>
+			</li>
+			<li class="char-origin">
+				<input type="text" name="system.detalhes.origem" value="{{system.detalhes.origem}}" placeholder="{{localize 'T20.Background'}}" data-tooltip="{{localize 'T20.Background'}}" />
+			</li>
+			<li class="char-class {{#unless actor.classes.length}}sem-classe{{/unless}}">
+				{{#if actor.classes.length}}
+					{{#each actor.classes as |class|}}
+					<span class="item" data-item-id="{{class._id}}">
+						<a class="item-control" data-tooltip="{{localize 'T20.Class'}}">{{class.name}} {{class.system.niveis}}</a>
+					</span>
+					{{/each}}
+					<a class="item-control class-config add-classe" data-tooltip="{{localize 'T20.Configure'}}"><i class="fa-solid fa-plus"></i></a>
+				{{else}}
+					<a class="item-control add-classe">{{localize 'T20.Class'}}</a>
+				{{/if}}
+			</li>
+			{{#if mostrarDivindade}}
+			<li class="char-deity">
+				<input type="text" name="system.detalhes.divindade" value="{{system.detalhes.divindade}}" placeholder="{{localize 'T20.Deity'}}" data-tooltip="{{localize 'T20.Deity'}}" />
+			</li>
+			{{/if}}
+		</ul>
+	</section>
+	<section class="char-level">
+		<div class="level" data-tooltip="{{localize 'T20.Level'}}">
+			<label>{{localize 'T20.Level'}}</label>
+			<span class="value">{{system.attributes.nivel.value}}</span>
+		</div>
+		{{#unless disableExperience}}
+		<div class="exp-data">
+			<div class="exp-input">
+				<input type="text" placeholder="0" data-dtype="Number" name="system.attributes.nivel.xp.value" value="{{system.attributes.nivel.xp.value}}" />
+				<span class="slash">/</span>
+				<span class="max">{{system.attributes.nivel.xp.proximo}}</span>
+			</div>
+			<progress value="{{system.attributes.nivel.xp.pct}}" max="100"></progress>
+		</div>
+		{{/unless}}
+	</section>
+</header>

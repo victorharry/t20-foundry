@@ -1,0 +1,155 @@
+{{!-- PONTOS DE VIDA --}}
+<header>
+	<h2>{{localize "T20.HitPoints"}}</h2>
+	<a class="config-button" data-action="resources" data-tooltip="{{localize 'T20.Edit'}}"><i class="fa-solid fa-heart-pulse"></i></a>
+</header>
+<div class="resource-block hitpoints">
+	<div class="big">
+		<div class="container temp">
+			<label class="sidebar_label">{{localize "T20.Temp"}}</label>
+			<div class="data-value">
+				<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.pv.temp" value="{{system.attributes.pv.temp}}" />
+			</div>
+		</div>
+		<div class="container current">
+			<label class="sidebar_label">{{localize "T20.Current"}}</label>
+			<div class="data-value">
+				<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.pv.value" value="{{system.attributes.pv.value}}" max="{{system.attributes.pv.max}}" />
+			</div>
+		</div>
+		<div class="container max">
+			<label class="sidebar_label">{{localize "T20.CRB.Max"}}</label>
+			<div class="data-value" data-tooltip="{{fieldBonuses 'system.attributes.pv'}}">
+				<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.pv.max" value="{{system.attributes.pv.max}}" {{disabled autoCalcResources}} />
+			</div>
+		</div>
+	</div>
+	<div class="small">
+		<a class="config-button roll-icon" data-action="rest" data-tooltip="{{localize 'T20.Rest'}}"><i class="fa-solid fa-bed"></i> <span class="sidebar_label">{{localize "T20.Rest"}}</span></a>
+	</div>
+</div>
+
+{{!-- PONTOS DE MANA --}}
+<header>
+	<h2>{{localize "T20.ManaPoints"}}</h2>
+</header>
+<div class="resource-block mana">
+	<div class="big">
+		<div class="container temp">
+			<label class="sidebar_label">{{localize "T20.Temp"}}</label>
+			<div class="data-value">
+				<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.pm.temp" value="{{system.attributes.pm.temp}}" />
+			</div>
+		</div>
+		<div class="container current">
+			<label class="sidebar_label">{{localize "T20.Current"}}</label>
+			<div class="data-value">
+				<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.pm.value" value="{{system.attributes.pm.value}}" max="{{system.attributes.pm.max}}" />
+			</div>
+		</div>
+		<div class="container max">
+			<label class="sidebar_label">{{localize "T20.CRB.Max"}}</label>
+			<div class="data-value" data-tooltip="{{fieldBonuses 'system.attributes.pm'}}">
+				<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.pm.max" value="{{system.attributes.pm.max}}" {{disabled autoCalcResources}} />
+			</div>
+		</div>
+	</div>
+</div>
+
+{{!-- DEFESA --}}
+<header>
+	<h2>{{localize "T20.Defense"}}</h2>
+</header>
+<div class="armor-class">
+	<div class="ac" data-tooltip="{{fieldBonuses 'system.attributes.defesa.bonus'}}">
+		<div class="data-value"><h2>{{system.attributes.defesa.value}}</h2></div>
+		<span class="sidebar_label">{{localize "T20.Defense"}}</span>
+	</div>
+	<div class="ac-details">
+		<label class="row">
+			<span class="sidebar_label">{{localize "T20.Ability"}}</span>
+			<select name="system.attributes.defesa.atributo" data-tooltip="{{localize 'T20.AbilityBonus'}}">
+				{{selectOptions config.atributosAbr selected=system.attributes.defesa.atributo blank=''}}
+			</select>
+		</label>
+		<label class="row">
+			<span class="sidebar_label">{{localize "T20.Other"}}</span>
+			<input type="text" data-dtype="Number" placeholder="0" name="system.attributes.defesa.outros" value="{{system.attributes.defesa.outros}}" />
+		</label>
+		<div class="row">
+			<span class="sidebar_label" data-tooltip="{{localize 'T20.ArmorPenalty'}}">{{localize "T20.CRB.ArmorPenaltyAbbr"}}</span>
+			<span class="modifier">{{numberFormat system.attributes.defesa.pda decimals=0 sign=true}}</span>
+		</div>
+	</div>
+</div>
+
+{{!-- ATRIBUTOS --}}
+<header>
+	<h2>{{localize "T20.Abilities"}}</h2>
+</header>
+<ul class="abilities">
+	{{#each system.atributos as |atr key|}}
+	<li class="ability" data-item-id="{{key}}">
+		<h4 class="abbreviation rollable atributo-rollable" data-tooltip="{{localize atr.label}}">{{localize (lookup ../config.atributosAbr key)}}</h4>
+		<a class="modifier rollable atributo-rollable" data-tooltip="{{localize 'T20.Roll'}}: {{localize atr.label}}">{{numberFormat atr.value decimals=0 sign=true}}</a>
+		<div class="inputs">
+			<input type="number" name="system.atributos.{{key}}.base" value="{{atr.base}}" data-tooltip="{{localize 'T20.AbilityBase'}}" />
+			{{#if @root.mostrarAtributoRacial}}
+			<input type="number" name="system.atributos.{{key}}.racial" value="{{atr.racial}}" data-tooltip="{{localize 'T20.AbilityRacial'}}" />
+			{{/if}}
+			{{#if @root.mostrarAtributoTemp}}
+			<input type="number" name="system.atributos.{{key}}.bonus" value="{{atr.bonus}}" data-tooltip="{{localize 'T20.AbilityBonus'}}" />
+			{{/if}}
+		</div>
+	</li>
+	{{/each}}
+</ul>
+
+{{!-- RESISTÊNCIAS --}}
+<header>
+	<h2>{{localize "T20.SavingThrows"}}</h2>
+</header>
+<ul class="saves">
+	{{#each crb.saves as |save|}}
+	<li class="roll-data" data-item-id="{{save.key}}">
+		<a class="roll-icon rollable pericia-rollable" data-tooltip="{{localize 'T20.Roll'}}: {{save.label}}"><i class="fa-solid fa-dice-d20"></i></a>
+		<span class="sidebar_label name">{{save.label}}</span>
+		<a class="modifier rollable pericia-rollable" data-tooltip="{{fieldBonuses (concat 'system.pericias.' save.key '.bonus')}}">{{numberFormat save.value decimals=0 sign=true}}</a>
+	</li>
+	{{/each}}
+	{{#each crb.quick as |skill|}}
+	<li class="roll-data quick" data-item-id="{{skill.key}}">
+		<a class="roll-icon rollable pericia-rollable" data-tooltip="{{localize 'T20.Roll'}}: {{skill.label}}"><i class="fa-solid fa-dice-d20"></i></a>
+		<span class="sidebar_label name">{{skill.label}}</span>
+		<a class="modifier rollable pericia-rollable" data-tooltip="{{fieldBonuses (concat 'system.pericias.' skill.key '.bonus')}}">{{numberFormat skill.value decimals=0 sign=true}}</a>
+	</li>
+	{{/each}}
+</ul>
+
+{{!-- DESLOCAMENTO / TAMANHO --}}
+<header>
+	<h2>{{localize "T20.Movement"}}</h2>
+	<a class="config-button" data-action="movement" data-target="system.attributes.movement" data-tooltip="{{localize 'T20.Edit'}}"><i class="fa-solid fa-pen-to-square"></i></a>
+</header>
+<ul class="tags speeds">
+	{{#each movement as |move key|}}
+	<li class="tag {{key}}">{{localize move}}</li>
+	{{/each}}
+</ul>
+<div class="size-row">
+	<span class="sidebar_label">{{localize "T20.Size"}}</span>
+	<select class="actor-size" name="system.tracos.tamanho">
+		{{selectOptions config.actorSizes selected=system.tracos.tamanho}}
+	</select>
+</div>
+
+{{!-- SENTIDOS --}}
+<header>
+	<h2><label>{{localize "T20.Senses"}}</label></h2>
+	<a class="trait-selector" data-options="senses" data-target="system.attributes.sentidos" data-tooltip="{{localize 'T20.Edit'}}"><i class="fa-solid fa-pen-to-square"></i></a>
+</header>
+<ul class="tags senses">
+	{{#each senses.value as |v k|}}
+	<li class="tag {{k}}">{{localize v}}</li>
+	{{/each}}
+</ul>

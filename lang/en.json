@@ -1091,6 +1091,8 @@
     "BasesSheet": "Bases Sheet",
     "CharacterSheet": "Character Sheet",
     "CharacterSheetTabbed": "Character Sheet - Tabs",
+    "CharacterSheetCRB": "T20 Character Sheet - Book style",
+    "CRB": {"ArmorPenaltyAbbr": "Armor pen.", "Combat": "Combat", "Favorites": "Favorites", "FavoritesHint": "right-click an item, power or spell to favorite it", "Max": "Max"},
     "NPCSheet": "NPC sheet",
     "CharacterBuilderSheet": "NPC creation",
     "SettingSheetSettings": "Sheet Settings",

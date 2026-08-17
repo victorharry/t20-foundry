@@ -1,0 +1,97 @@
+<form class="tormenta20 crb-style {{cssClass}}" autocomplete="off">
+	{{!-- BARRA LATERAL --}}
+	<aside class="crb-aside">
+		<div class="portrait">
+			<img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+		</div>
+		<div class="sidebar">
+			{{> "tormenta20.crb-sidebar"}}
+		</div>
+	</aside>
+
+	{{!-- CABEÇALHO --}}
+	{{> "tormenta20.crb-header"}}
+
+	{{!-- NAVEGAÇÃO --}}
+	<nav class="sheet-tabs tabs sheet-navigation" data-group="primary" data-tooltip-direction="UP" role="tablist">
+		<span class="panel-title">{{actor.name}}</span>
+		<a class="item" data-tab="character" data-tooltip="T20.Details" aria-label="{{localize 'T20.Details'}}"><i class="fa-solid fa-address-card"></i></a>
+		<a class="item" data-tab="combat" data-tooltip="T20.CRB.Combat" aria-label="{{localize 'T20.CRB.Combat'}}"><i class="fa-solid fa-swords"></i></a>
+		<a class="item" data-tab="inventory" data-tooltip="T20.Inventory" aria-label="{{localize 'T20.Inventory'}}"><i class="fa-solid fa-backpack"></i></a>
+		<a class="item" data-tab="powers" data-tooltip="T20.Powers" aria-label="{{localize 'T20.Powers'}}"><i class="fa-solid fa-medal"></i></a>
+		{{#if crb.showSpells}}
+		<a class="item" data-tab="spells" data-tooltip="T20.Spells" aria-label="{{localize 'T20.Spells'}}"><i class="fa-solid fa-wand-magic-sparkles"></i></a>
+		{{/if}}
+		<a class="item" data-tab="effects" data-tooltip="T20.Effects" aria-label="{{localize 'T20.Effects'}}"><i class="fa-solid fa-person-rays"></i></a>
+		<a class="item" data-tab="journal" data-tooltip="T20.Journal" aria-label="{{localize 'T20.Journal'}}"><i class="fa-solid fa-book-open-reader"></i></a>
+		<a class="item" data-tab="modifiers" data-tooltip="T20.Bonuses" aria-label="{{localize 'T20.Bonuses'}}"><i class="fa-solid fa-sliders"></i></a>
+	</nav>
+
+	{{!-- CORPO --}}
+	<section class="sheet-body">
+		{{!-- Personagem: perícias + características --}}
+		<div class="tab character" data-group="primary" data-tab="character">
+			<div class="column skills-column">
+				{{> "tormenta20.list-skills"}}
+			</div>
+			<div class="column details-column">
+				{{#if system.resources.shadow}}
+				<section class="subsection resources-extra">
+					{{> "tormenta20.resources-extra"}}
+				</section>
+				{{/if}}
+				{{> "tormenta20.crb-traits"}}
+				<section class="subsection notes">
+					<header><span>{{localize "T20.Notes"}}</span></header>
+					<textarea name="system.detalhes.info" rows="6" placeholder="{{localize 'T20.Notes'}}">{{system.detalhes.info}}</textarea>
+				</section>
+			</div>
+		</div>
+
+		{{!-- Combate: armas + favoritos --}}
+		<div class="tab combat" data-group="primary" data-tab="combat">
+			<section class="subsection weapons">
+				{{> "tormenta20.list-weapon"}}
+			</section>
+			<section class="subsection favorites">
+				<header>
+					<span>{{localize "T20.CRB.Favorites"}}</span>
+					<small>{{localize "T20.CRB.FavoritesHint"}}</small>
+				</header>
+				{{> "tormenta20.list-favorites"}}
+			</section>
+		</div>
+
+		{{!-- Inventário --}}
+		<div class="tab inventory" data-group="primary" data-tab="inventory">
+			{{> "tormenta20.list-inventory"}}
+		</div>
+
+		{{!-- Poderes --}}
+		<div class="tab powers" data-group="primary" data-tab="powers">
+			{{> "tormenta20.list-powers-tabbed"}}
+		</div>
+
+		{{!-- Magias --}}
+		{{#if crb.showSpells}}
+		<div class="tab spells" data-group="primary" data-tab="spells">
+			{{> "tormenta20.list-spells"}}
+		</div>
+		{{/if}}
+
+		{{!-- Efeitos --}}
+		<div class="tab effects" data-group="primary" data-tab="effects">
+			{{> "tormenta20.active-effects"}}
+		</div>
+
+		{{!-- Diário --}}
+		<div class="tab journal flexrow flex-between" data-group="primary" data-tab="journal">
+			{{> "tormenta20.journal"}}
+		</div>
+
+		{{!-- Modificadores --}}
+		<div class="tab modifiers" data-group="primary" data-tab="modifiers">
+			{{> "tormenta20.modifiers"}}
+		</div>
+	</section>
+</form>

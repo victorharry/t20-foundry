@@ -31,6 +31,7 @@ import HazardSheetT20 from "./module/sheets/actor-hazard.mjs";
 import ActorSheetT20NPC from "./module/sheets/actor-npc.mjs";
 import ActorSheetT20Simple from "./module/sheets/actor-simple.mjs";
 import ActorSheetT20CharacterTabbed from "./module/sheets/actor-tabbed.mjs";
+import ActorSheetT20CharacterCRB from "./module/sheets/actor-crb.mjs";
 import RaceSheetT20 from "./module/sheets/item-race-sheet.mjs";
 import ItemSheetT20 from "./module/sheets/item-sheet.mjs";
 
@@ -69,6 +70,7 @@ globalThis.tormenta20 = {
 		AbilityUseDialog,
 		ActorSheetT20Character,
 		ActorSheetT20CharacterTabbed,
+		ActorSheetT20CharacterCRB,
 		ActorSheetT20NPC,
 		ItemSheetT20,
 		TraitSelector,
@@ -185,9 +187,14 @@ Hooks.once("init", async function () {
 		makeDefault: true,
 		label: "T20.BasesSheet" // "Ficha de Bases"
 	});
-	foundry.documents.collections.Actors.registerSheet("tormenta20", ActorSheetT20Character, {
+	foundry.documents.collections.Actors.registerSheet("tormenta20", ActorSheetT20CharacterCRB, {
 		types: ["character"],
 		makeDefault: true,
+		label: "T20.CharacterSheetCRB" // "Ficha de Personagem T20 - Livro"
+	});
+	foundry.documents.collections.Actors.registerSheet("tormenta20", ActorSheetT20Character, {
+		types: ["character"],
+		makeDefault: false,
 		label: "T20.CharacterSheet" // "Ficha de Personagem"
 	});
 	foundry.documents.collections.Actors.registerSheet("tormenta20", ActorSheetT20CharacterTabbed, {

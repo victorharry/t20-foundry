@@ -1,0 +1,12 @@
+Fontes usadas pela ficha de personagem "estilo livro" (character-crb).
+
+- Eczar (eczar-*.woff2) — © Rosetta Type Foundry. SIL Open Font License 1.1.
+  https://fonts.google.com/specimen/Eczar
+- Gelasio (gelasio-*.woff2) — © Eben Sorkin. SIL Open Font License 1.1.
+  https://fonts.google.com/specimen/Gelasio
+- Roboto Condensed (roboto-condensed-*.woff2) — © Christian Robertson / Google.
+  Apache License 2.0 (versões antigas) / SIL OFL 1.1 (versões atuais).
+  https://fonts.google.com/specimen/Roboto+Condensed
+
+Arquivos obtidos via google-webfonts-helper (subsets latin + latin-ext), tal como
+distribuídos pelo sistema PF2e para Foundry VTT.

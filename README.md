@@ -31,7 +31,7 @@ Sistema **não oficial** de [Tormenta20](https://jamboeditora.com.br/categoria/r
 
 ## O que o sistema oferece
 
-- **Fichas** — Personagem (padrão e em abas), Ameaça/NPC, Personagem Simples, Base (construções) e Perigo Complexo.
+- **Fichas** — Personagem em três layouts: **Livro** (padrão do T20: barra lateral com PV/PM/Defesa/atributos/resistências, cabeçalho com nível/XP e abas com ícones — organização inspirada na ficha do PF2e), Padrão (página única) e Abas; Ameaça/NPC, Personagem Simples, Base (construções) e Perigo Complexo. Troque o layout pelo botão *Configurar Ficha* (ícone de engrenagem) da janela.
 - **Itens** — Armas, Equipamentos, Consumíveis, Tesouros, Magias, Poderes, Classes, Raças, Cômodos e Mobílias.
 - **Compêndios** — Raças, Classes, Poderes, Poderes de Distinção, Equipamentos, Itens Mágicos, Magias, Habilidades de Criaturas, Poções, Parceiros, Ameaças, Convocações, Livro Básico (regras em diários), Tabelas de Tesouro e Macros.
 - **Automação** — rolagens de perícias/ataques/dano com modificadores do sistema, uso de habilidades com custo de PM, aprimoramentos de magia (Efeitos de Uso), efeitos temporários com duração por turno/cena, condições de Tormenta20, templates de área, régua de token, calculadora de habilidades, importador de blocos de estatísticas (statblock) e progressão de personagem.

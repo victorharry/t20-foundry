@@ -106,21 +106,17 @@ export default class ActorSync extends DocumentSheet {
 						break;
 				}
 
-				ignore.system = Object.fromEntries(ignore.system.map((k) => [`-=${k}`, null]));
-				ignore.flags = Object.fromEntries(ignore.flags.map((k) => [`-=${k}`, null]));
+				// Remove as chaves ignoradas diretamente (a sintaxe "-=chave" do mergeObject não existe mais no Foundry v14)
+				const omit = (obj, keys) => {
+					const out = obj ?? {};
+					for (const k of keys) delete out[k];
+					return out;
+				};
 
-				_item.system = foundry.utils.mergeObject(_item.system, ignore.system, {
-					performDeletions: true
-				});
-				_item.system = foundry.utils.flattenObject(_item.system);
-				_source.system = foundry.utils.mergeObject(_source.system, ignore.system, { performDeletions: true });
-				_source.system = foundry.utils.flattenObject(_source.system);
-				_item.flags.tormenta20 = foundry.utils.mergeObject(_item.flags.tormenta20 ?? {}, ignore.flags, {
-					performDeletions: true
-				});
-				_source.flags.tormenta20 = foundry.utils.mergeObject(_source.flags.tormenta20 ?? {}, ignore.flags, {
-					performDeletions: true
-				});
+				_item.system = foundry.utils.flattenObject(omit(_item.system, ignore.system));
+				_source.system = foundry.utils.flattenObject(omit(_source.system, ignore.system));
+				_item.flags.tormenta20 = omit(_item.flags.tormenta20, ignore.flags);
+				_source.flags.tormenta20 = omit(_source.flags.tormenta20, ignore.flags);
 
 				status.name = _item.name == _source.name;
 				status.name_diff = status.name ? null : _source.name;

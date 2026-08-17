@@ -34,10 +34,12 @@ export default class TokenRulerT20 extends foundry.canvas.placeables.tokens.Toke
 
 	static applyMovementConfig() {
 		const sourceActions = CONFIG.Token.movement.actions;
+		// Remove a ação "rastejar" diretamente: no Foundry v14 `mergeObject` não aceita mais a sintaxe "-=chave"
+		// (performDeletions), o que deixava `crawl` sem label e quebrava o carregamento do mundo.
+		delete sourceActions.crawl;
 		foundry.utils.mergeObject(
 			CONFIG.Token.movement.actions,
 			{
-				"-=crawl": null,
 				blink: {
 					label: "T20.MovementTeleport"
 				},
@@ -80,8 +82,7 @@ export default class TokenRulerT20 extends foundry.canvas.placeables.tokens.Toke
 				walk: {
 					label: "T20.MovementWalk"
 				}
-			},
-			{ performDeletions: true }
+			}
 		);
 	}
 }

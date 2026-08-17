@@ -2,7 +2,7 @@
   "id": "tormenta20",
   "title": "T20",
   "description": "Sistema NÃO OFICIAL de Tormenta20 para Foundry VTT (fork T20). Documentação e referências de uso (@atributos, @UUID, efeitos, macros): <a href=\"https://victorharry.github.io/t20-foundry/\">https://victorharry.github.io/t20-foundry/</a>",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "compatibility": {
     "minimum": "13",
     "verified": "14",

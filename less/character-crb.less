@@ -1255,8 +1255,8 @@
       ul.currency {
         display: flex;
         box-shadow: var(--crb-emboss);
-        background: var(--crb-sub);
-        color: var(--crb-text-light);
+        background: linear-gradient(180deg, var(--crb-primary-light), var(--crb-primary) 60%, var(--crb-primary-dark));
+        color: #fff;
         border-radius: 3px;
         padding: 3px;
         margin: 0;
@@ -1266,33 +1266,44 @@
           color: var(--crb-tertiary);
           padding: 0 0.5rem;
           flex: 0 0 auto;
+          font-size: 1rem;
         }
         li.currency-item {
           flex: 0 0 auto;
-          border-left: 1px solid rgba(0, 0, 0, 0.2);
-          border-right: 1px solid rgba(255, 255, 255, 0.1);
+          border-left: 1px solid rgba(0, 0, 0, 0.35);
+          border-right: 1px solid rgba(255, 255, 255, 0.12);
           display: flex;
           align-items: center;
-          gap: 0.3rem;
-          padding: 0 0.4rem;
+          gap: 0.4rem;
+          padding: 0 0.5rem;
           label {
             .crb-micro();
-            color: #ffe8d1;
-            text-shadow:
-              1px 1px 1px rgba(255, 255, 255, 0.2),
-              -1px -1px 1px rgba(0, 0, 0, 0.2);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--crb-tertiary);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
           }
-          input {
-            color: var(--crb-text-light);
+          input,
+          input[type="number"] {
+            color: #fff;
             width: 4.5rem;
             text-align: right;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font: 700 1rem var(--crb-serif);
-            height: 1.3rem;
-            background: transparent;
+            border: 1px solid rgba(233, 215, 161, 0.35);
+            border-radius: 2px;
+            font: 700 1.05rem var(--crb-serif);
+            height: 1.45rem;
+            padding: 0 0.35rem;
+            background: rgba(0, 0, 0, 0.45);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+            &:hover,
+            &:focus {
+              border-color: var(--crb-tertiary);
+              box-shadow:
+                inset 0 1px 3px rgba(0, 0, 0, 0.6),
+                0 0 4px var(--crb-tertiary);
+            }
           }
           &.main label {
-            font-size: 0.8rem;
             color: var(--crb-tertiary);
           }
           &.legacy {
